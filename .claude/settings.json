@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(node -e ' *)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(mv dev.db dev.db.bak)",
+      "Bash(npm run *)"
     ]
   }
 }

@@ -6,6 +6,10 @@ import { RunScrapeButton } from "./components/RunScrapeButton";
 import { TopTenPanel } from "./components/TopTenPanel";
 import { ComparisonTable } from "./components/ComparisonTable";
 
+// This page reads live DB state and search params — never statically
+// prerender it (also avoids running DB queries at build time).
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage({
   searchParams,
 }: {
