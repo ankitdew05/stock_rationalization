@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest --help)",
+      "Bash(npx --yes create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --disable-git --yes)",
+      "Bash(npx --yes create-next-app@latest tmp-scaffold --ts --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --disable-git --yes)",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(node -e \"const f=require\\('fuzzball'\\); console.log\\(Object.keys\\(f\\)\\)\")",
+      "Bash(npm test *)",
+      "WebFetch(domain:docs.firecrawl.dev)",
+      "Bash(curl -s -X POST https://api.firecrawl.dev/v2/scrape -H 'Authorization: Bearer fc-756d664d2cab4273b17a9790fe00ab6a' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const d=require\\('./profile_start.json'\\); console.log\\('success:', d.success\\); console.log\\('scrapeId:', d.data && d.data.metadata && d.data.metadata.scrapeId\\);\")",
+      "Bash(curl -s -X POST https://api.firecrawl.dev/v2/scrape/01a035b4-bfba-736b-b822-ad55823ae6c8/interact -H 'Authorization: Bearer fc-756d664d2cab4273b17a9790fe00ab6a' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -X DELETE https://api.firecrawl.dev/v2/scrape/01a035b4-bfba-736b-b822-ad55823ae6c8/interact -H 'Authorization: Bearer fc-756d664d2cab4273b17a9790fe00ab6a' -w '\\\\nHTTP %{http_code}\\\\n')",
+      "Bash(node -e \"const d=require\\('./profile_check.json'\\); console.log\\(d.data.markdown.slice\\(0,300\\)\\);\")",
+      "Bash(node -e \"const d=require\\('./profile_check2.json'\\); console.log\\('cacheState:', d.data.metadata.cacheState\\); console.log\\(d.data.markdown.slice\\(0,300\\)\\);\")",
+      "Bash(node -e \"const d=require\\('./profile_check3.json'\\); console.log\\(d.data.markdown.slice\\(0,400\\)\\);\")",
+      "Bash(npx tsx *)",
+      "Bash(npm view *)",
+      "Bash(node -e \"console.log\\(Object.keys\\(require\\('@prisma/adapter-better-sqlite3'\\)\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{try{const j=JSON.parse\\(d\\);console.log\\('success:',j.success, j.error||''\\);}catch\\(e\\){console.log\\(d.slice\\(0,500\\)\\)}}\\)\")",
+      "Bash(rm -f zepto_retry.json)"
+    ]
+  }
+}

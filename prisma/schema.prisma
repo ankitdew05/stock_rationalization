@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Location {
+  id             String   @id @default(cuid())
+  label          String
+  pincode        String
+  address        String
+  blinkitProfile String
+  zeptoProfile   String
+  profilesReady  Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  scrapeRuns ScrapeRun[]
+}
+
+model Category {
+  id         String @id @default(cuid())
+  name       String @unique
+  blinkitUrl String
+  zeptoUrl   String
+
+  products Product[]
+  matches  ProductMatch[]
+}
+
+model ScrapeRun {
+  id         String    @id @default(cuid())
+  locationId String
+  location   Location  @relation(fields: [locationId], references: [id])
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  status     String // "running" | "done" | "failed"
+
+  products Product[]
+  matches  ProductMatch[]
+
+  @@index([locationId, status])
+}
+
+model Product {
+  id            String    @id @default(cuid())
+  scrapeRunId   String
+  scrapeRun     ScrapeRun @relation(fields: [scrapeRunId], references: [id])
+  categoryId    String
+  category      Category  @relation(fields: [categoryId], references: [id])
+  platform      String // "blinkit" | "zepto"
+  name          String
+  brand         String?
+  quantityRaw   String?
+  quantityValue Float?
+  quantityUnit  String?
+  price         Float
+  mrp           Float?
+  imageUrl      String?
+  rank          Int
+  sourceUrl     String
+
+  matchesAsBlinkit ProductMatch[] @relation("BlinkitProduct")
+  matchesAsZepto   ProductMatch[] @relation("ZeptoProduct")
+
+  @@index([scrapeRunId, categoryId, platform])
+}
+
+model ProductMatch {
+  id               String    @id @default(cuid())
+  scrapeRunId      String
+  scrapeRun        ScrapeRun @relation(fields: [scrapeRunId], references: [id])
+  categoryId       String
+  category         Category  @relation(fields: [categoryId], references: [id])
+  blinkitProductId String
+  blinkitProduct   Product   @relation("BlinkitProduct", fields: [blinkitProductId], references: [id])
+  zeptoProductId   String
+  zeptoProduct     Product   @relation("ZeptoProduct", fields: [zeptoProductId], references: [id])
+  similarityScore  Float
+
+  @@index([scrapeRunId, categoryId])
+}
